@@ -19,10 +19,13 @@ def main():
         print("У нас нет такой специальности")
         return
     result = utils.check_fitness(student, profession)
-    print(f"\nПригодность {result['fit_percent']}%\n{student['full_name']} знает ", end="")
-    print(*result['has'], sep=", ")
-    print(f"{student['full_name']} не знает ", end="")
-    print(*result['lacks'], sep=", ")
+    print(f"\nПригодность {result['fit_percent']}%")
+    if result['has'] != []:
+        print(f"{student['full_name']} знает ", end="")
+        print(*result['has'], sep=", ")
+    if result['lacks'] != []:
+        print(f"{student['full_name']} не знает ", end="")
+        print(*result['lacks'], sep=", ")
 
 
 if __name__ == "__main__":
