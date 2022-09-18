@@ -11,7 +11,7 @@ def main():
     if not student:
         print("У нас нет такого студента")
         return
-    print(f"Студент {student['full_name']}\nЗнает ", end="")
+    print(f"Студент {student['full_name']}\nЛогин: {student['login']} ({'валидный' if utils.is_valid(student['login']) else 'не валидный'})\nЗнает ", end="")
     print(*student['skills'], sep=", ")
     title = input(f"\nВыберите специальность для оценки студента {student['full_name']}: ").capitalize()
     profession = utils.get_profession_by_title(title)

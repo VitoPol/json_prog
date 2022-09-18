@@ -1,5 +1,6 @@
 import json
-
+import re
+from typing import Optional
 
 def load_students() -> list:
     """
@@ -21,7 +22,7 @@ def load_professions() -> list:
     return professions
 
 
-def get_student_by_pk(pk: int) -> dict or None:
+def get_student_by_pk(pk: int) -> Optional[dict]:
     """
     Вытаскивает из файла данные студента по его номеру
     :param pk: номер студента
@@ -33,7 +34,7 @@ def get_student_by_pk(pk: int) -> dict or None:
         return None
 
 
-def get_profession_by_title(title: str) -> dict or None:
+def get_profession_by_title(title: str) -> Optional[dict]:
     """
     Вытаскивает из файла данные по профессии по её названию
     :param title: название профессии
@@ -66,3 +67,17 @@ def check_fitness(student: dict, profession: dict) -> dict:
     }
 
     return result
+
+
+def is_valid(login: str) -> bool:
+    """
+    Проверяет валидность логина
+    :param login: собственно, логин который нужно проверить
+    :return: True если валидно, False в противном случае
+    """
+    reg = re.compile(r"^[a-z].*[0-9a-zA-Z]$")
+    if reg.match(login) and re.search(r"[A-Z]", login) and re.search(r"[0-9]", login) and re.search(r"[-_@#$%&*=+]", login):
+        return True
+    return False
+
+
